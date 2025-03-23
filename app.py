@@ -17,19 +17,29 @@ def login():
 
 def createUser():
     print("criar usuario")
+
     new_user = input('Nome de usuario: ')
     new_password = input('Senha: ')
-    for user in users:
-        if user['user'] == new_user:
-            print("Usuario já existe")
-            return 0
-        else:
-            credentials = {"user": new_user, "password": new_password}
-            users.append(credentials)
-            with open('credentials.json', 'w', encoding='utf-8') as arquivo:
-                json.dump(users, arquivo, indent =4)
-            print(f'Usuário {new_user} criado com sucesso')
-            break 
+
+    if users:
+        for user in users:
+            if user['user'] == new_user:
+                print("Usuario já existe")
+                return 0
+            else:
+                credentials = {"user": new_user, "password": new_password}
+                users.append(credentials)
+                with open('credentials.json', 'w', encoding='utf-8') as arquivo:
+                    json.dump(users, arquivo, indent =4)
+                print(f'Usuário {new_user} criado com sucesso')
+                break
+    else:
+        credentials = {"user": new_user, "password": new_password}
+        users.append(credentials)
+        with open('credentials.json', 'w', encoding='utf-8') as arquivo:
+            json.dump(users, arquivo, indent =4)
+        print(f'Usuário {new_user} criado com sucesso')
+        
 
 def getUserInput():
     global userInput
@@ -67,5 +77,4 @@ def selectAction():
 
 
 selectAction()
-
 
