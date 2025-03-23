@@ -13,7 +13,7 @@ def login():
     getUserInput()
     autenticado = autenticate(userInput,passwordInput)
     if autenticado == 0:
-        login()
+        selectAction()
 
 def createUser():
     with open('credentials.json', 'r', encoding='utf-8') as arquivo:
@@ -23,6 +23,7 @@ def createUser():
     new_user = input('Nome de usuario: ')
     new_password = input('Senha: ')
     global lista_de_usuarios
+    lista_de_usuarios = []
     if users:
         for user in users:
             lista_de_usuarios.append(user['user'])
@@ -30,11 +31,11 @@ def createUser():
 
                 print("Usuario já existe")
                 return 0
-        print("chegous")
+            
         credentials = {"user": new_user, "password": new_password}
         users.append(credentials)
         lista_de_usuarios.append(new_user)
-        print(lista_de_usuarios)
+
         with open('credentials.json', 'w', encoding='utf-8') as arquivo:
             json.dump(users, arquivo, indent =4)
             print(f'Usuário {new_user} criado com sucesso')
@@ -93,5 +94,5 @@ def selectAction():
 
 
 
-selectAction()
+
 
