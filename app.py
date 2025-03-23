@@ -1,13 +1,13 @@
 import json
-
+import csv
 #variables
 userInput = ''
 passwordInput = ''
 autenticado = 0
 success = 0
+
 with open('credentials.json', 'r', encoding='utf-8') as arquivo:
     users = json.load(arquivo)  # loads json file into a variable
-
 
 def login():
     getUserInput()
@@ -16,29 +16,34 @@ def login():
         login()
 
 def createUser():
+    with open('credentials.json', 'r', encoding='utf-8') as arquivo:
+        users = json.load(arquivo)  # loads json file into a variable
     print("criar usuario")
 
     new_user = input('Nome de usuario: ')
     new_password = input('Senha: ')
-
     if users:
         for user in users:
             if user['user'] == new_user:
                 print("Usuario já existe")
                 return 0
-            else:
-                credentials = {"user": new_user, "password": new_password}
-                users.append(credentials)
-                with open('credentials.json', 'w', encoding='utf-8') as arquivo:
-                    json.dump(users, arquivo, indent =4)
-                print(f'Usuário {new_user} criado com sucesso')
-                break
+            
+        credentials = {"user": new_user, "password": new_password}
+        users.append(credentials)
+        with open('credentials.json', 'w', encoding='utf-8') as arquivo:
+            json.dump(users, arquivo, indent =4)
+            print(f'Usuário {new_user} criado com sucesso')
+            
+
     else:
         credentials = {"user": new_user, "password": new_password}
         users.append(credentials)
         with open('credentials.json', 'w', encoding='utf-8') as arquivo:
             json.dump(users, arquivo, indent =4)
         print(f'Usuário {new_user} criado com sucesso')
+        with open('tabela.csv', 'w', newline='') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow([new_user])
         
 
 def getUserInput():
@@ -48,6 +53,8 @@ def getUserInput():
     passwordInput = input("Password:")
 
 def autenticate(userInput, passwordInput):
+    with open('credentials.json', 'r', encoding='utf-8') as arquivo:
+        users = json.load(arquivo)  # loads json file into a variable
     for user in users:
         if user['user'] == userInput:
             if user['password'] == passwordInput:
