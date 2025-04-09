@@ -7,8 +7,8 @@ autenticado = 0
 success = 0
 lista_de_usuarios = []
 currentUser = ''
-with open('credentials.json', 'r', encoding='utf-8') as arquivo:
-    users = json.load(arquivo)  # loads json file into a variable
+#with open('credentials.json', 'r', encoding='utf-8') as arquivo:
+    #users = json.load(arquivo)  # loads json file into a variable
 
 def login():
     getUserInput()
@@ -43,6 +43,10 @@ def createUser():
         with open('tabela.csv', 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(lista_de_usuarios)
+        with open(f'{new_user}.csv', 'w', newline='') as csvfile2:
+            print("Criando")
+            csvwriter = csv.writer(csvfile2)
+            csvwriter.writerow(['Saldo:', 0])
         
 
             
@@ -56,6 +60,10 @@ def createUser():
         with open('tabela.csv', 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow([new_user])
+        with open(f'{new_user}.csv', 'w', newline='') as csvfile2:
+            print("Criando")
+            csvwriter = csv.writer(csvfile2)
+            csvwriter.writerow(['Saldo:', 0])
         
 
 def getUserInput():
