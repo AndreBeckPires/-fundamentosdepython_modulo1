@@ -8,9 +8,12 @@
 #saque = 
 #deposito = 
 class CaixaEletronico:
-    def __init__(self):
+
+    usuario = ''
+    def __init__(self,valor,user):
+        self.usuario = user
         #Inicializa o saldo do caixa eletrônico como 0.
-        self.saldo = 0
+        self.saldo = valor
     
     def ver_saldo(self):
         #Retorna o saldo atual.
@@ -34,7 +37,7 @@ class CaixaEletronico:
 
 # Função para exibir o menu e permitir que o usuário escolha a operação
 def menu():
-    caixa = CaixaEletronico()
+    
     
     while True:
         print("\nEscolha uma operação:")
@@ -70,4 +73,4 @@ def menu():
             print("Opção inválida! Tente novamente.")
 
 # volta para o inicio
-menu()
+
