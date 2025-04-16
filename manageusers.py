@@ -91,7 +91,7 @@ def autenticate(userInput, passwordInput):
 
 def selectAction():
     global success
-    print("Digite 1 para fazer login, 0 para criar um novo usuario ou 2 para encerrar aplicação:")
+    print("Digite:\n1 para fazer login \n0 para criar um novo usuario\n2 para encerrar aplicação")
     action = input()
     if action == '1':
         login()

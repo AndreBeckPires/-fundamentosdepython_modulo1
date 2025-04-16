@@ -1,6 +1,7 @@
 import manageusers
 import caixaeletronico
 import csv
+import registradora
 
 def createObject():
     while manageusers.success != 1:
@@ -13,6 +14,7 @@ def createObject():
             for row in csvreader:
                 global dados
                 dados = row
+                break
     global usuario
     usuario =  caixaeletronico.CaixaEletronico(float(dados[1]),manageusers.getUser())
     print(f'Conectado como {usuario.usuario}')
@@ -39,9 +41,8 @@ def menu():
                 valor_deposito = float(input("Digite o valor a ser depositado: R$"))
                 usuario.deposito(valor_deposito)
                 dados[1] = usuario.ver_saldo()
-                with open(f'{manageusers.getUser()}.csv', 'w', newline='') as csvfile:
-                    csvwriter = csv.writer(csvfile)
-                    csvwriter.writerow(dados)
+                registradora.registrarDeposito(f'{manageusers.getUser()}.csv',valor_deposito)
+                registradora.atSaldo(f'{manageusers.getUser()}.csv',dados)
             except ValueError:
                 print("Valor inválido! Digite um número válido.")
             
@@ -50,9 +51,9 @@ def menu():
                 valor_saque = float(input("Digite o valor a ser sacado: R$"))
                 usuario.saque(valor_saque)
                 dados[1] = usuario.ver_saldo()
-                with open(f'{manageusers.getUser()}.csv', 'w', newline='') as csvfile:
-                    csvwriter = csv.writer(csvfile)
-                    csvwriter.writerow(dados)
+                registradora.registraSaque(f'{manageusers.getUser()}.csv',valor_saque)
+                registradora.atSaldo(f'{manageusers.getUser()}.csv',dados)
+
             except ValueError:
                 print("Valor inválido! Digite um número válido.")
         elif opcao == "4":
