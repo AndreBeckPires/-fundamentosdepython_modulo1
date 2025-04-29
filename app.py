@@ -3,26 +3,26 @@ import caixaeletronico
 import csv
 import registradora
 
-def createObject():
+def creater_object():
     while manageusers.success != 1:
-        manageusers.selectAction()
+        manageusers.select_action()
 
-    if(manageusers.getAutenticado() == 1):
+    if(manageusers.get_autenticado() == 1):
         print("Entrou")
-        with open(f'{manageusers.getUser()}.csv', 'r', newline='') as csvfile:
+        with open(f'{manageusers.get_user()}.csv', 'r', newline='') as csvfile:
             csvreader = csv.reader(csvfile)
             for row in csvreader:
                 global dados
                 dados = row
                 break
     global usuario
-    usuario =  caixaeletronico.CaixaEletronico(float(dados[1]),manageusers.getUser())
+    usuario =  caixaeletronico.CaixaEletronico(float(dados[1]),manageusers.get_user())
     print(f'Conectado como {usuario.usuario}')
     menu()
 
 
 def menu():
-    while manageusers.getAutenticado() == 1:
+    while manageusers.get_autenticado() == 1:
 
         print("\nEscolha uma operação:")
         print("1. Ver saldo")
@@ -41,8 +41,8 @@ def menu():
                 valor_deposito = float(input("Digite o valor a ser depositado: R$"))
                 usuario.deposito(valor_deposito)
                 dados[1] = usuario.ver_saldo()
-                registradora.registrarDeposito(f'{manageusers.getUser()}.csv',valor_deposito)
-                registradora.atSaldo(f'{manageusers.getUser()}.csv',dados)
+                registradora.registrarDeposito(f'{manageusers.get_user()}.csv',valor_deposito)
+                registradora.atualizar_saldo(f'{manageusers.get_user()}.csv',dados)
             except ValueError:
                 print("Valor inválido! Digite um número válido.")
             
@@ -51,16 +51,16 @@ def menu():
                 valor_saque = float(input("Digite o valor a ser sacado: R$"))
                 usuario.saque(valor_saque)
                 dados[1] = usuario.ver_saldo()
-                registradora.registraSaque(f'{manageusers.getUser()}.csv',valor_saque)
-                registradora.atSaldo(f'{manageusers.getUser()}.csv',dados)
+                registradora.registrar_saque(f'{manageusers.get_user()}.csv',valor_saque)
+                registradora.atualizar_saldo(f'{manageusers.get_user()}.csv',dados)
 
             except ValueError:
                 print("Valor inválido! Digite um número válido.")
         elif opcao == "4":
             print("Deslogando")
             manageusers.logout()
-            manageusers.selectAction()
-            createObject()
+            manageusers.select_action()
+            creater_object()
             break
         elif opcao == "5":
             print("Saindo... Até logo!")
@@ -71,4 +71,4 @@ def menu():
 
 
 
-createObject()
+creater_object()

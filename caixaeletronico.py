@@ -35,42 +35,4 @@ class CaixaEletronico:
         else:
             print("Saldo insuficiente para realizar o saque.")
 
-# Função para exibir o menu e permitir que o usuário escolha a operação
-def menu():
-    
-    
-    while True:
-        print("\nEscolha uma operação:")
-        print("1. Ver saldo")
-        print("2. Depositar")
-        print("3. Sacar")
-        print("4. Sair")
-        
-        opcao = input("Digite o número da opção desejada: ")
-        
-        if opcao == "1":
-            print(f"Saldo atual: R${caixa.ver_saldo()}")
-        
-        elif opcao == "2":
-            try:
-                valor_deposito = float(input("Digite o valor a ser depositado: R$"))
-                caixa.deposito(valor_deposito)
-            except ValueError:
-                print("Valor inválido! Digite um número válido.")
-        
-        elif opcao == "3":
-            try:
-                valor_saque = float(input("Digite o valor a ser sacado: R$"))
-                caixa.saque(valor_saque)
-            except ValueError:
-                print("Valor inválido! Digite um número válido.")
-        
-        elif opcao == "4":
-            print("Saindo... Até logo!")
-            break
-        
-        else:
-            print("Opção inválida! Tente novamente.")
-
-# volta para o inicio
 

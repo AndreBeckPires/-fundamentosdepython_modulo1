@@ -1,19 +1,19 @@
 import csv
-def atSaldo(file, data):
+def atualizar_saldo(file, data):
     with open(file, 'r', newline='') as csvfile:
         new = []
         reader = csv.reader(csvfile)
         for row in reader:
             new.append(row)
-    print(new[0])
+   
     new[0] = data
-    print(new[0])
+
     with open(file, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         for row in new:
             csvwriter.writerow(row)
 
-def registraSaque(file,value):
+def registrar_saque(file,value):
     operacao = ['Saque',value]
     with open(file, 'a', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)

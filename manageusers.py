@@ -1,8 +1,8 @@
 import json
 import csv
 #variables
-userInput = ''
-passwordInput = ''
+user_input = ''
+password_input = ''
 autenticado = 0
 success = 0
 lista_de_usuarios = []
@@ -11,12 +11,12 @@ currentUser = ''
     #users = json.load(arquivo)  # loads json file into a variable
 
 def login():
-    getUserInput()
-    autenticado = autenticate(userInput,passwordInput)
+    get_user_input()
+    autenticado = autenticate(user_input,password_input)
     if autenticado == 0:
-        selectAction()
+        select_action()
 
-def createUser():
+def create_user():
     with open('credentials.json', 'r', encoding='utf-8') as arquivo:
         users = json.load(arquivo)  # loads json file into a variable
     print("criar usuario")
@@ -66,11 +66,11 @@ def createUser():
             csvwriter.writerow(['Saldo:', 0])
         
 
-def getUserInput():
-    global userInput
-    global passwordInput
-    userInput = input("User:") 
-    passwordInput = input("Password:")
+def get_user_input():
+    global user_input
+    global password_input
+    user_input = input("User:") 
+    password_input = input("Password:")
 
 def autenticate(userInput, passwordInput):
     with open('credentials.json', 'r', encoding='utf-8') as arquivo:
@@ -89,23 +89,23 @@ def autenticate(userInput, passwordInput):
     print("Usuario nao encontrado")
     return 0
 
-def selectAction():
+def select_action():
     global success
     print("Digite:\n1 para fazer login \n0 para criar um novo usuario\n2 para encerrar aplicação")
     action = input()
     if action == '1':
         login()
     if action == '0':
-        createUser()
+        create_user()
     if action == '2':
         exit()
     if success == 1:
         print("Conectado")
 
     else:
-        selectAction()
+        select_action()
 
-def getAutenticado():
+def get_autenticado():
     return success
 
 
@@ -114,7 +114,7 @@ def logout():
     success = 0
     return success
 
-def getUser():
+def get_user():
     return currentUser
 
 
