@@ -8,7 +8,6 @@ def creater_object():
         manageusers.select_action()
 
     if(manageusers.get_autenticado() == 1):
-        print("Entrou")
         with open(f'{manageusers.get_user()}.csv', 'r', newline='') as csvfile:
             csvreader = csv.reader(csvfile)
             for row in csvreader:
@@ -28,8 +27,9 @@ def menu():
         print("1. Ver saldo")
         print("2. Depositar")
         print("3. Sacar")
-        print("4. Sair")
-        print("5. Encerrar")
+        print("4. Extrato")
+        print("5. Sair")
+        print("6. Encerrar")
             
         opcao = input()
             
@@ -57,12 +57,14 @@ def menu():
             except ValueError:
                 print("Valor inválido! Digite um número válido.")
         elif opcao == "4":
+            registradora.mostrar_extrato(f'{manageusers.get_user()}.csv')
+        elif opcao == "5":
             print("Deslogando")
             manageusers.logout()
             manageusers.select_action()
             creater_object()
             break
-        elif opcao == "5":
+        elif opcao == "6":
             print("Saindo... Até logo!")
             exit()
             

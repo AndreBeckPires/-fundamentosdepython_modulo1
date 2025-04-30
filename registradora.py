@@ -24,3 +24,18 @@ def registrarDeposito(file,value):
     with open(file, 'a', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(operacao)  
+
+def mostrar_extrato(file):
+    with open(file,'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        saldo = 0
+        i = 0
+        for row in csvreader:
+            if i != 0:
+                print(f'Operação: {row[0]} | Valor: {row[1]} Reais')
+            else:
+                saldo = str({row[1]})
+                saldo = saldo[2:-2]
+            i+= 1
+        print(f'Saldo atual: {saldo} Reais')
+
